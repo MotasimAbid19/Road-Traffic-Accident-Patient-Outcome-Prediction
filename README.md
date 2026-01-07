@@ -88,14 +88,15 @@ The workflow benchmarks baseline models and then applies **ensemble learning wit
 ## Repository Structure
 
 ```text
-rta-patient-outcome-prediction-ensemble-ml/
+road-traffic-accident-patient-outcome-prediction/
 ├─ notebooks/
-│  └─ Final_Phase_Notebook.ipynb
+│  └─ Final_Phase_NoteBook.ipynb
 ├─ reports/
-│  ├─ FINAL_PHASE_REPORT.pdf
 │  └─ FINAL_PHASE_REPORT.docx
+│  └─ FINAL_PHASE_REPORT.pdf
 ├─ data/
 │  ├─ .gitkeep
+│  └─ RTA-DATA-2020-TO-JULY-2023.xlsx
 │  └─ README.md
 ├─ assets/
 │  └─ screenshots/
