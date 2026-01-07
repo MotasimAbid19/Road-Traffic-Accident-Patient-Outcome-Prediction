@@ -1,64 +1,101 @@
-# Predictive Analysis of Patient Outcomes in Road Traffic Accidents (Ensemble ML)
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0f2027,100:2c5364&height=200&section=header&text=RTA%20Patient%20Outcome%20Prediction&fontSize=34&fontColor=ffffff&desc=Ensemble%20Machine%20Learning&descAlignY=65">
+</p>
 
-Ensemble machine learning pipeline for predicting **patient outcome severity** after road traffic accidents using **emergency-response and hospital records (2020–2023)**. The project benchmarks baseline models and then applies ensemble methods with feature engineering and hyperparameter tuning for high-performing multi-class classification.
+<!-- # RTA Patient Outcome Prediction (Ensemble Machine Learning) -->
 
-> Course project: **CSE445** (Final Phase).  
 
+# Road Traffic Accident Patient Outcome Prediction 
+<p align="center">
+  <img alt="Python" src="https://img.shields.io/badge/Python-3.x-blue">
+  <img alt="scikit-learn" src="https://img.shields.io/badge/scikit--learn-ML-orange">
+  <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green">
+  <img alt="Status" src="https://img.shields.io/badge/Status-Academic%20Project-informational">
+</p>
+
+Ensemble machine learning pipeline for predicting **patient outcome severity** following road traffic accidents using **emergency-response and hospital records (2020–2023)**.
+
+> Academic project — **CSE445 (Final Phase)**  
+> ⚠️ Research and educational use only. Not a clinical decision support system.
 
 ---
 
 ## Overview
 
-Road traffic accidents require rapid triage. This project predicts patient outcome classes (e.g., **Alive & stable**, **Alive & unstable/critical**, **Dead**) from accident context, patient demographics, injury information, and emergency response features.
+Road traffic accidents require rapid and accurate triage.  
+This project predicts **patient outcome categories** — such as:
 
-Key points from the final report:
-- Dataset: **46,190 records**, **25 features**, collected **2020–2023**
-- Two-phase workflow: baseline models → ensemble models
-- Feature engineering (notably a composite **Cause_Reason** feature) strongly improved performance
-- Best reported ensemble: **Gradient Boosting ~99.36% accuracy** (see report for full details)
+- Alive & Stable  
+- Alive & Unstable / Critical  
+- Deceased  
+
+using accident context, patient demographics, injury details, and emergency response features.
+
+The workflow benchmarks baseline models and then applies **ensemble learning with feature engineering and hyperparameter optimization** to achieve high multi-class classification performance.
+
+### Key Facts
+
+- **Dataset:** 46,190 records, 25 features  
+- **Time span:** 2020–2023  
+- **Pipeline:** Baseline models → Ensemble models  
+- **Best model:** Gradient Boosting  
+- **Best accuracy:** **~99.36%** (post-tuning)
 
 ---
 
 ## Features
 
-- End-to-end ML workflow in a single Jupyter notebook:
-  - Data upload/loading
-  - Missing-value handling and encoding
-  - Feature engineering (**Cause_Reason** composite + encoding)
-  - Train/validation/test split (stratified)
-  - Baseline models (Logistic Regression, Decision Tree, SVM)
-  - Ensemble models (Bagging, AdaBoost, Gradient Boosting, XGBoost, Voting, Stacking)
-  - RandomizedSearchCV hyperparameter tuning for ensembles
-  - Evaluation with accuracy/precision/recall/F1, confusion matrices, learning curves
-- Final report included in `reports/` documenting methodology and results
+- End-to-end ML workflow implemented in a single Jupyter notebook
+- Data preprocessing:
+  - Missing-value handling
+  - Categorical encoding
+  - Stratified train/validation/test split
+- Feature engineering:
+  - Composite **Cause_Reason** contextual feature
+- Model benchmarking:
+  - Logistic Regression
+  - Decision Tree
+  - Support Vector Machine (SVM)
+- Ensemble models:
+  - Bagging
+  - AdaBoost
+  - Gradient Boosting
+  - XGBoost
+  - Voting Classifier
+  - Stacking Classifier
+- Hyperparameter tuning using `RandomizedSearchCV`
+- Evaluation:
+  - Accuracy, Precision, Recall, F1-score
+  - Confusion matrices
+  - Learning curves
+- Final academic report included in `reports/`
 
 ---
 
 ## Tech Stack
 
-- Python 3
-- Jupyter Notebook / Google Colab
-- Core libraries:
+- **Language:** Python 3
+- **Environment:** Jupyter Notebook / Google Colab
+- **Libraries:**
   - `pandas`, `numpy`
   - `scikit-learn`
   - `xgboost`
   - `matplotlib`, `seaborn`
   - `scipy`
 
----
+
 
 ## Repository Structure
 
 ```text
-road-traffic-accident-patient-outcome-prediction/
+rta-patient-outcome-prediction-ensemble-ml/
 ├─ notebooks/
-│  └─ Final_Phase_NoteBook.ipynb
+│  └─ Final_Phase_Notebook.ipynb
 ├─ reports/
+│  ├─ FINAL_PHASE_REPORT.pdf
 │  └─ FINAL_PHASE_REPORT.docx
-│  └─ FINAL_PHASE_REPORT.pdf
 ├─ data/
 │  ├─ .gitkeep
-│  └─ RTA-DATA-2020-TO-JULY-2023.xlsx
 │  └─ README.md
 ├─ assets/
 │  └─ screenshots/
@@ -67,90 +104,96 @@ road-traffic-accident-patient-outcome-prediction/
 ├─ LICENSE
 └─ README.md
 ```
-
 ## Dataset
 
+- ~46,000 rows  
+- 25 features  
+- **Target column:** `PatientStatus`  
+- Combination of numerical and categorical attributes
 
-- ~46k rows, 25 features  
-- Target column: `PatientStatus`  
-- Mix of numerical and categorical features, for example:  
-  `Age`, `Gender`, `EducationTitle`, `EmergencyArea`, `Cause`, `Reason`,  
-  `ResponseTime`, `InjuryType`, vehicle counts, etc.
+### Example Features
 
-### Local dataset placement
+- `Age`, `Gender`, `EducationTitle`
+- `EmergencyArea`, `ResponseTime`
+- `Cause`, `Reason`, `InjuryType`
+- Vehicle counts and accident context variables
 
-1. Put the dataset Excel file in `data/`, for example:
-   - `data/RTA-DATA-2020-TO-JULY-2023.xlsx`
-2. Update the notebook’s dataset-loading cell to something like:
-```
-import pandas as pd
+### Local Dataset Placement
 
-df = pd.read_excel("data/RTA-DATA-2020-TO-JULY-2023.xlsx")
-```
-### Expected characteristics (from report)
+1. Place the dataset file inside the `data/` directory  
+   ```data/RTA-DATA-2020-TO-JULY-2023.xlsx```
 
-- ~46k rows, 25 features  
-- Target column: `PatientStatus`  
-- Mix of numerical and categorical features, for example:  
-  `Age`, `Gender`, `EducationTitle`, `EmergencyArea`, `Cause`, `Reason`,  
-  `ResponseTime`, `InjuryType`, vehicle counts, etc.
-
-### How to use your dataset locally
-
-1. Put the dataset Excel file in `data/` (example):
-   - `data/road_traffic_accidents.xlsx`
-2. Update the notebook’s load cell to:
-```data/road_traffic_accidents.xlsx```
-
->If your dataset filename or columns differ, update the notebook accordingly.
-
-## Setup / Installation (Local)
-```
-python -m venv .venv
-source .venv/bin/activate   # (Windows) .venv\Scripts\activate
-pip install -U pip
-pip install pandas numpy scikit-learn xgboost matplotlib seaborn scipy jupyter
+2. Update the dataset loading cell in the notebook:
+  ``` import pandas as pd  
+  df = pd.read_excel("data/RTA-DATA-2020-TO-JULY-2023.xlsx")
 ```
 
-*Optional: create `requirements.txt` later for cleaner installs.*
+> Dataset is **not included** in this repository due to academic and privacy constraints.
+
+---
+
+## Setup & Installation (Local)
+```
+python -m venv .venv  
+source .venv/bin/activate  (Windows: .venv\Scripts\activate)  
+pip install --upgrade pip  
+pip install pandas numpy scikit-learn xgboost matplotlib seaborn scipy jupyter  
+```
+*Optional: add `requirements.txt` later for reproducibility.*
 
 ---
 
 ## Usage
 
-### Option A — Run in Google Colab 
+### Option A — Google Colab
 
-1. Open `notebooks/CGS545_Final_Phase_Notebook.ipynb` in Colab
-2. Upload the dataset file when prompted
-3. Run all cells top-to-bottom
+1. Open `notebooks/Final_Phase_Notebook.ipynb` in Google Colab  
+2. Upload the dataset file when prompted  
+3. Run all cells sequentially  
 
-### Option B — Run locally
+### Option B — Local Execution
 
-1. Place dataset in `data/`
-2. Modify the dataset-loading cell (replace Colab upload with a local path)
-3. Run the notebook with:
+1. Place the dataset file in the `data/` directory  
+2. Replace Colab upload logic with a local file path  
+3. Run Jupyter Notebook:
+   ```jupyter notebook```
 
-``` 
-jupyter notebook
+---
 
-```
+## Methodology Summary
 
+This project predicts **patient outcome status** from road traffic accident records using a complete ML pipeline:
 
-## Method Summary
+- **Data Preparation**
+  - Load dataset
+  - Handle missing values
+  - Encode categorical variables
+  - Remove duplicates (if present)
 
-This project predicts **patient outcome status** from road traffic accident records using an end-to-end ML workflow:
+- **Feature Engineering**
+  - Construct a composite contextual feature:
+    - `Cause_Reason = Cause + "_" + Reason + "_" + EmergencyArea`
 
-- **Data preparation:** load the dataset, handle missing values (notebook-defined strategy), and remove duplicates (if any).
-- **Feature engineering:** construct a composite context feature to capture accident conditions:
-  - `Cause_Reason = Cause + "_" + Reason + "_" + EmergencyArea`
-- **Encoding:**
-  - Encode categorical variables (mix of one-hot/ordinal/target-based approaches as implemented in the notebook).
-  - Encode the target label `PatientStatus` into numeric classes.
-- **Model training (benchmarking):**
-  - Baselines: Logistic Regression, Decision Tree, SVM
-  - Ensembles: Bagging, AdaBoost, Gradient Boosting, XGBoost, Voting, Stacking
-- **Hyperparameter tuning:** use randomized hyperparameter search to find best settings for each model family.
-- **Evaluation:** compare models after tuning and report final post-tuning performance.
+- **Model Training**
+  - Baseline models:
+    - Logistic Regression
+    - Decision Tree
+    - Support Vector Machine (SVM)
+  - Ensemble models:
+    - Bagging
+    - AdaBoost
+    - Gradient Boosting
+    - XGBoost
+    - Voting Classifier
+    - Stacking Classifier
+
+- **Hyperparameter Optimization**
+  - Randomized hyperparameter search for each model family
+
+- **Evaluation**
+  - Accuracy, Precision, Recall, F1-score
+  - Confusion matrices
+  - Pre- vs post-tuning performance comparison
 
 ---
 
@@ -185,42 +228,44 @@ This project predicts **patient outcome status** from road traffic accident reco
 | Stacking            | `{'estimators': ['lr', 'dt', 'svm'], 'final_est...}` |
 | Voting              | `{'voting': 'soft'}` |
 
-### Accuracy: Pre vs Post-Tuning (Figure)
+### Accuracy Comparison (Pre vs Post Tuning)
 
-![Accuracy: Pre vs Post-Tuning](assets/screenshots/accuracy-pre-vs-post.png)
+![Accuracy Comparison](assets/screenshots/accuracy-pre-vs-post.png)
 
+---
 
 ## Limitations
 
-- Dataset is not shipped; reproduction requires access to the Excel file.
-- Results depend on the split strategy and random seed used in the notebook (document/lock these for strict reproducibility).
-- This is an academic project and **not** a clinical decision support tool.
+- Dataset is not publicly available
+- Results depend on data split strategy and random seed
+- Academic project — **not validated for clinical decision-making**
 
 ---
 
 ## Roadmap
 
 - [ ] Add `requirements.txt`
-- [ ] Add fixed random seeds and a documented split strategy
-- [ ] Add full parameter export (no truncation)
-- [ ] Add an inference example (save/load best model)
+- [ ] Fix and document random seeds
+- [ ] Export full hyperparameter configurations
+- [ ] Add inference pipeline (model save/load)
 
 ---
 
 ## License
 
-MIT
+MIT License
+
 ---
 
 ## Acknowledgements
 
-- CSE445 — course context  
-- scikit-learn and XGBoost libraries used for modeling
+- **CSE445** — course context  
+- Open-source ML ecosystem:
+  - scikit-learn
+  - XGBoost
 
 ---
 
 ## Contact
-
-- Motasim Abid — motasimabid19@gmail.com  
-- Naima Zaman Roshni — naima.zaman@northsouth.edu
-
+- [**Motasim Abid**](https://github.com/MotasimAbid19) — Motasimabid19@gmail.com  
+- [**Naima Zaman Roshni**](https://github.com/NaimaRoshni) — naima.zaman@northsouth.edu
